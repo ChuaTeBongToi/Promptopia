@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 
 import Profile from '@components/Profile'
 
@@ -10,20 +10,30 @@ const myProfile = () => {
 
     const router = useRouter()
 
-    const { data: session } = useSession();
+    const params = useParams();
 
     const [myPosts, setMyPosts] = useState([]);
 
+    const [user, setUser] = useState({});
+
     useEffect(() => {
         const fetchPosts = async () => {
-            const response = await fetch(`/api/users/${session?.user.id}/posts`);
+            const response = await fetch(`/api/users/${params.id}/posts`);
             const data = await response.json();
 
             setMyPosts(data);
         }
 
-        if (session?.user.id) fetchPosts();
-    }, [session?.user.id])
+        const fetchUser = async () => {
+            const response = await fetch(`/api/users/${params.id}`);
+            const data = await response.json();
+
+            setUser(data);
+        }
+
+        fetchPosts();
+        fetchUser();
+    }, [params.id])
 
     const handleEdit = (post) => {
         router.push(`/update-prompt?id=${post._id}`)
@@ -47,9 +57,11 @@ const myProfile = () => {
         }
     }
 
+    console.log(myPosts);
+
     return (
         <Profile
-            name="My"
+            name={user.username}
             desc="Welcome to your personalized profile page"
             data={myPosts}
             handleEdit={handleEdit}

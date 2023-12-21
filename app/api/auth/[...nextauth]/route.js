@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google'
 
-import User from "@models/user";
+import User from "@models/User";
 import { connnectToDB } from "@utils/database";
 
 import removeDiacritics from "@components/translate";
