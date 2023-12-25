@@ -48,22 +48,10 @@ const Feed = () => {
     return t;
   }
 
-  const fetchPosts = async () => {
-    const response = await fetch("/api/prompt");
-    const data = await response.json();
-
-    setPosts(data);
-    setFilledPost(data);
-
-    return data;
-  }
-
   const handleSearchChange = (e) => {
     e.preventDefault();
 
     setSearchText(e.target.value);
-
-    fetchPosts();
 
     console.log(posts);
 
@@ -71,6 +59,16 @@ const Feed = () => {
   }
 
   useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("/api/prompt");
+      const data = await response.json();
+
+      setPosts(data);
+      setFilledPost(data);
+
+      return data;
+    }
+
     fetchPosts();
   }, [])
 
