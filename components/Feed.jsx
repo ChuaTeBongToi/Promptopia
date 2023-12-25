@@ -53,8 +53,6 @@ const Feed = () => {
 
     setSearchText(e.target.value);
 
-    console.log('Handled searching :', searchText);
-
     setFilledPost(Filled(e.target.value));
   }
 
