@@ -66,6 +66,8 @@ const Feed = () => {
 
     setPosts(data);
     setFilledPost(data);
+
+    return data;
   }
 
 
