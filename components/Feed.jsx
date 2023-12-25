@@ -65,8 +65,6 @@ const Feed = () => {
 
       setPosts(data);
       setFilledPost(data);
-
-      console.log('Fetched data :', data);
     }
 
     fetchPosts();
