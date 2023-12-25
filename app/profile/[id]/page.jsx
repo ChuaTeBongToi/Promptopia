@@ -57,8 +57,6 @@ const myProfile = () => {
         }
     }
 
-    console.log(myPosts);
-
     return (
         <Profile
             name={user.username}
