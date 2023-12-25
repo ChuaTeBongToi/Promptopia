@@ -60,18 +60,17 @@ const Feed = () => {
     setFilledPost(Filled(e.target.value));
   }
 
-  const fetchPosts = async () => {
-    const response = await fetch("/api/prompt");
-    const data = await response.json();
-
-    setPosts(data);
-    setFilledPost(data);
-
-    return data;
-  }
-
-
   useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("/api/prompt");
+      const data = await response.json();
+
+      setPosts(data);
+      setFilledPost(data);
+
+      return data;
+    }
+
     fetchPosts();
   }, [])
 
